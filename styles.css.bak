@@ -1,0 +1,587 @@
+:root{--bg:#ecfdf5;--ink:#064e3b;--pri:#059669;--border:#a7f3d0;--card:#ffffff;--muted:#0f766e}
+*{box-sizing:border-box}
+html{min-height:100%;position:relative}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;padding-bottom:80px}
+.container{max-width:1040px;margin:auto;padding:16px}
+.header-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+/* .logo{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--pri);color:#fff;box-shadow:0 6px 16px rgba(5,150,105,.25)} */
+.navlink{border:1px solid var(--border);background:#fff;color:var(--ink);padding:10px 14px;border-radius:14px;text-decoration:none;transition:.2s}
+.navlink.active,.navlink:hover{background:var(--pri);border-color:var(--pri);color:#fff}
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:1fr}
+@media(min-width:800px){.grid-2{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:22px;box-shadow:0 6px 20px rgba(4,120,87,.07)}
+.btn{border:1px solid var(--border);background:#fff;color:var(--ink);padding:10px 14px;border-radius:14px;cursor:pointer;text-decoration:none;transition:.2s}
+.btn.primary{background:var(--pri);border-color:var(--pri);color:#fff}
+.btn:hover{background:#f7fff9}
+.btn.primary:hover{filter:brightness(.95)}
+.kpi{padding:12px;border:1px solid var(--border);background:#f0fdf4;border-radius:16px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+footer{border-top:1px solid var(--border);padding:20px;text-align:center;color:var(--muted);position:absolute;bottom:0;left:0;right:0;background:var(--bg)}
+.list{padding-left:18px}
+.pill{border:1px solid var(--border);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer}
+.pill.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+
+
+ 
+form {
+  max-width: 700px;
+  margin: 0 auto;
+  border: none;
+  padding-bottom: 5px;
+} 
+ 
+label {
+  display: block;
+  margin: 1rem 0;
+}
+
+input,  select {
+  vertical-align: middle;
+  display: block;
+  width: 100%;
+  margin: 10px auto;    
+  padding: 0;
+  min-height: 3rem;
+}
+ .radio,  input[type="checkbox"] {
+  display: inline;
+  max-width: 7%;
+  min-height: 1rem;
+  margin-bottom: 15px;
+}
+
+textarea {
+  width: 100%;
+  padding: 0;
+}
+ .recommendation {
+  margin: 0 0;
+}
+ input[type="submit"] {
+  margin: 2rem auto;
+}
+ fieldset {
+  border: none;
+}
+ input,  select,  textarea {
+  color: grey;
+  box-sizing: border-box;
+  padding: 10px 10px; }
+
+ input[type="submit"] {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: rgb(13, 172, 64);
+  border: none;
+  min-width: 50%;
+  max-width: 90%;
+  color: white;
+  margin-bottom: 0px;
+ }
+ div[class="logo"] {
+    visibility: hidden;
+ }
+ .logo {
+ }
+ .brad {
+  display: flex;
+  justify-content: center;
+ }
+ nav {
+  padding-bottom: 10px;
+ }
+ /*small {
+  display: block;
+  margin-top: -55px;
+  margin-left: 95px;
+  font-style:  italic;
+  color: black;
+  font-weight: bold; 
+
+ } */
+ header, footer {
+  background-color: #ecfdf5;
+ }
+ html, main, body {
+  background-color: white;
+ }
+hr {
+  border: 1px solid var(--border);
+}
+.motto {
+  text-align: center;
+  font-style: Verdana, sans-serif;
+  font-weight: bold;
+  color: red; 
+}
+footer {
+  margin-top: 50px;
+}
+
+
+
+
+
+
+  #meals {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 10px;
+  }
+  #meals li {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 10px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 12px;
+    padding: 10px;
+  }
+  #meals img {
+    width: 88px;
+    height: 88px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  #meals .meal-title {
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  #imgCredit {
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
+  }
+
+
+/* --- Global responsive tweaks --- */
+
+/* Base text and container for smaller screens */
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .header-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .brand .logo {
+    max-width: 220px;
+    height: auto;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .navlink {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 8px 10px;
+  }
+
+  /* Cards and grids */
+  .card {
+    padding: 16px;
+  }
+
+  .grid {
+    gap: 10px;
+  }
+
+  /* Forms – better spacing and width on mobile */
+  form {
+    max-width: 100%;
+    padding: 0 4px 10px;
+  }
+
+  label {
+    margin: 0.7rem 0;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 2.6rem;
+    margin: 8px 0;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .radio,
+  input[type="checkbox"] {
+    max-width: none;
+    margin-right: 6px;
+  }
+
+  /* BMI grid: stack height/weight fields on very small screens */
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Survey checkbox and radio groups: avoid cramped inline layout */
+  #survey .recommendation,
+  #survey .hear {
+    display: block;
+    margin-bottom: 6px;
+  }
+}
+
+/* Slightly wider phones / small tablets */
+@media (min-width: 601px) and (max-width: 900px) {
+  .header-wrap {
+    flex-wrap: wrap;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .navlink {
+    padding: 8px 12px;
+  }
+}
+
+
+/* --- Utility classes for inline style removal --- */
+.mt-16 { margin-top: 16px; }
+.mt-12 { margin-top: 12px; }
+.mb-16 { margin-bottom: 1rem; }
+.mt-16-px { margin-top: 1rem; }
+.w-6rem { width: 6rem; }
+.ai-center { align-items: center; }
+
+#bmiValue {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* Grid spacing adjustments */
+main > .grid.grid-2 { margin-top: 16px; }
+.card .row { margin-top: 12px; }
+.kpi + .grid { margin-top: 12px; }
+
+
+/* --- Dotaznik page specific styles --- */
+
+/* Desktop layout - two column form */
+@media (min-width: 601px) {
+  #quizForm {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2.5rem;
+    column-gap: 1rem;
+    width: 100%;
+  }
+
+  #quizForm > label {
+    flex: 0 0 auto;
+  }
+
+  #goalRow {
+    margin-left: auto;
+  }
+
+  #prefs {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Input and layout adjustments */
+#age { width: 6rem; }
+#goalRow, #prefs { align-items: center; }
+#result .nums { margin-bottom: 1rem; }
+#result > .muted:last-of-type { margin-top: 1rem; }
+
+/* Pills styling */
+.pill {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: #eee;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.pill.active {
+  background: #22bb77;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Meal cards grid */
+#mealCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#mealCards .card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  width: 100%;
+}
+
+#mealCards .thumb {
+  aspect-ratio: 16/10;
+  width: 100%;
+  object-fit: cover;
+  background: #f5f5f5;
+}
+
+#mealCards .card h4 {
+  margin: 0.6rem 0.9rem 0;
+  font-size: 1rem;
+}
+
+#mealCards .meta {
+  margin: 0.4rem 0.9rem 0.9rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Result section */
+#result .nums {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#result .nums > div {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.muted {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Normalize h1 styling across all pages */
+.container > h1 {
+  margin: 0 0 1rem 0 !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  padding: 0 !important;
+}
+
+/* Extra space below h1 for dotaznik form */
+body:has(#quizForm) .container > h1 {
+  margin-bottom: 3rem !important;
+}
+
+/* Dotaznik page layout */
+body:has(#quizForm) main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.2rem;
+  box-sizing: border-box;
+}
+
+#quizForm > label {
+  margin: 0;
+}
+
+/* Meals list (if used) */
+#meals {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 520px));
+  gap: 14px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+#meals li {
+  max-width: 520px;
+  width: 100%;
+  justify-self: center;
+}
+
+/* Footer sticky positioning for dotaznik */
+html:has(#quizForm) {
+  position: relative;
+  min-height: 100%;
+}
+
+body:has(#quizForm) {
+  margin: 0;
+  padding-bottom: 80px;
+}
+
+body:has(#quizForm) footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  padding: 20px;
+  background: #ecfdf5;
+  color: #0f766e;
+}
+
+/* Submit button */
+button[type="submit"] {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgb(13, 172, 64);
+  border: 1px solid black;
+  color: white;
+  margin-bottom: 0px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  filter: brightness(0.95);
+}
+
+/* Dotaznik responsive */
+@media (max-width: 560px) {
+  #result .nums {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  body:has(#quizForm) main {
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  body:has(#quizForm) h1 {
+    text-align: center;
+    width: 100%;
+  }
+
+  #quizForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  #quizForm > label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+
+  #quizForm input,
+  #quizForm select {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  #age {
+    width: 100%;
+    max-width: 150px;
+  }
+
+  #goalRow,
+  #prefs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  #goalRow strong,
+  #prefs strong {
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  #goalRow .pill,
+  #prefs .pill {
+    margin: 4px;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    max-width: 300px;
+    margin: 1rem 0;
+  }
+
+  #result {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #result h2,
+  #result h3 {
+    text-align: center;
+    width: 100%;
+  }
+
+  #result .nums {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  #mealCards {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+
+
+
+  

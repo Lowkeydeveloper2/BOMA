@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+  <title>Výživa – odporúčania s fotkami</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+    body { font-family: system-ui, Arial, sans-serif; margin: 0; line-height: 1.5; }
+    main { max-width: 1000px; margin: 0 auto; padding: 1.2rem; box-sizing: border-box; }
+    h1 { margin: .2rem 0 1rem; }
+    .row { display: flex; flex-wrap: wrap; gap: var(--gap); }
+    .pill { padding: .5rem .9rem; border-radius: 999px; background: var(--pill); cursor: pointer; user-select: none; }
+    .pill.active { background: var(--pill-active); color: #fff; font-weight: 600; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: var(--gap); }
+    .card { border: 1px solid #ddd; border-radius: 12px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+    .thumb { aspect-ratio: 16/10; width: 100%; object-fit: cover; background:#f5f5f5; }
+    .card h4 { margin: .6rem .9rem 0; font-size: 1rem; }
+    .meta { margin: .4rem .9rem .9rem; color:#555; font-size:.9rem;}
+    .nums { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:.5rem; }
+    .nums div { background:#fafafa; border:1px solid #eee; border-radius:10px; padding:.5rem; text-align:center; }
+    .muted { color:#666; font-size:.9rem; }
+    .hidden { display:none; }
+
+    /* malé zlepšenia na mobil */
+    @media (max-width:560px){
+      .nums { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+
+
+    /* -- centrovanie kontajnerov s obrázkami -- */
+
+/* karty v #mealCards: pevnejšia šírka stĺpcov + centrovanie mriežky */
+#mealCards {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+  justify-content: center; /* vycentruje celé stĺpce v rámci dostupnej šírky */
+}
+#mealCards .card {
+  max-width: 300px;        /* aby sa karta nerozťahovala na 1fr cez celú šírku */
+  width: 100%;
+}
+
+/* položky zoznamu v #meals: vycentrujeme a obmedzíme max. šírku karty */
+#meals {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 520px));
+  justify-content: center;
+}
+#meals li {
+  max-width: 520px;        /* aby každá položka mala „kartu“ v strede */
+  width: 100%;
+  justify-self: center;    /* pre istotu centrovanie v bunke mriežky */
+}
+
+
+
+
+
+/* --- footer prilepený na spodok, bez zmeny vzhľadu mainu --- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding-bottom: 80px; /* rezerva pre footer */
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  padding: 20px;
+  background: #ecfdf5; /* rovnaké ako header */
+  color: #0f766e;
+}
+
+button[type="submit"] {
+    font-size: 16px;
+  font-weight: bold;
+  background-color: rgb(13, 172, 64);
+  border: 1px solid black;
+
+  color: white;
+  margin-bottom: 0px;
+
+}
+
+  @media (max-width: 600px) {
+    main {
+      padding: 0.8rem 0.7rem;
+    }
+
+    #quizForm .row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    #goalRow strong,
+    #prefs strong {
+      margin-bottom: 4px;
+    }
+
+    #mealCards {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-wrap" id="fix">
+      <div class="brand">
+          <a href="index.html"><img src="images/logo-boma.png" class="logo" width="300" alt="BOMA Logo" ></a>
+        
+      </div>
+      <nav>
+        <a class="navlink" href="index.html">Domov</a>
+        <a class="navlink" href="bmi.html">BMI</a>
+        <a class="navlink active" href="dotaznik.html">Odporúčania</a>
+        <a class="navlink" href="survey.html">Prieskum</a>
+      </nav>
+    </div>
+    <hr>
+  </header>
+<main>
+  <h1>Stravovací mini-plán</h1>
+
+  <!-- Ukážkové ovládanie (ak už máš vlastné inputs, nechaj svoje id-čka, len ponechaj výsledkové id-čka nižšie) -->
+  <form id="quizForm" class="row" autocomplete="off">
+    <label>Vek: <input id="age" type="number" min="10" max="90" step="1" required style="width:6rem"></label>
+    <label>Pohlavie:
+      <select id="sex">
+        <option value="male">muž</option>
+        <option value="female">žena</option>
+      </select>
+    </label>
+    <label>Aktivita:
+      <select id="activity">
+        <option value="low">nízka</option>
+        <option value="moderate" selected>stredná</option>
+        <option value="high">vysoká</option>
+      </select>
+    </label>
+
+    <div id="goalRow" class="row" style="align-items:center">
+      <strong>Cieľ:</strong>
+      <span class="pill active" data-goal="lose">chudnúť</span>
+      <span class="pill" data-goal="maintain">udržať</span>
+      <span class="pill" data-goal="gain">pribrať</span>
+    </div>
+
+    <div id="prefs" class="row" style="align-items:center">
+      <strong>Preferencie:</strong>
+      <span class="pill" data-pref="vegetarian">vegetarián</span>
+      <span class="pill" data-pref="vegan">vegan</span>
+      <span class="pill" data-pref="lowcarb">low-carb</span>
+    </div>
+
+    <button type="submit">Vypočítať</button>
+  </form>
+
+  <section id="result" class="hidden">
+    <h2>Tvoj denný plán</h2>
+    <div class="nums" style="margin-bottom:1rem">
+      <div><div><strong id="outKcal">–</strong></div><div class="muted">kcal</div></div>
+      <div><div><strong id="outProtein">–</strong></div><div class="muted">bielkoviny</div></div>
+      <div><div><strong id="outCarbs">–</strong></div><div class="muted">sacharidy</div></div>
+      <div><div><strong id="outFats">–</strong></div><div class="muted">tuky</div></div>
+    </div>
+
+    <h3>Navrhované jedlá</h3>
+    <!--<ul id="meals" class="hidden"></ul> -->
+
+    <div id="mealCards" class="grid"></div>
+
+    <p id="tips" class="muted"></p>
+
+    <p class="muted" style="margin-top:1rem">
+    </p>
+  </section>
+</main>
+
+<footer>© <span id="yearFooter"></span> BOMA. Edukačný projekt. </footer>
+
+<script>
+  // rok len do footeru
+  document.getElementById('yearFooter').textContent = new Date().getFullYear();
+
+  // výber cieľa
+  const goalRow = document.getElementById('goalRow');
+  let goal = 'lose';
+  goalRow.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-goal]');
+    if (!b) return;
+    goal = b.dataset.goal;
+    goalRow.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p === b));
+  });
+
+  // preferencie
+  const prefs = new Set();
+  document.getElementById('prefs').addEventListener('click', e => {
+    const p = e.target.closest('[data-pref]');
+    if (!p) return;
+    const k = p.dataset.pref;
+    if (prefs.has(k)) { prefs.delete(k); p.classList.remove('active'); }
+    else { prefs.add(k); p.classList.add('active'); }
+  });
+
+  // kalkulácie
+  function estimateKcalBase(s, a, act) {
+    let base = 1800;
+    if (s === 'male') base += 200;
+    if (!isNaN(a)) {
+      if (a < 18) base -= 100;
+      else if (a > 50) base -= 100;
+    }
+    const m = act === 'low' ? 1.2 : act === 'moderate' ? 1.4 : 1.6;
+    return Math.round(base * m);
+  }
+
+  // 🍽️ rozšírený zoznam jedál s obrázkami a kalóriami
+  const mealsData = {
+  vegan_lowcarb: [
+    { name: "Tofu miešanica",            kcal: 320, img: "https://live.staticflickr.com/3249/2895513435_c06b483287_c.jpg" },
+    { name: "Cícerový šalát",            kcal: 350, img: "https://live.staticflickr.com/8537/8703897106_d13737fc79_b.jpg" },
+    { name: "Tempeh s brokolicou",       kcal: 400, img: "https://live.staticflickr.com/3920/14986785846_47de0478fc_b.jpg" },
+    { name: "Avokádový toast",           kcal: 280, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ5dXrAUYCbVYTJueXY7dvsgfwhWtn0Z1UFQ&s" },
+    { name: "Šalát s tofu a semienkami", kcal: 330, img: "https://i2.pickpik.com/photos/277/235/602/salad-leaf-lettuce-olives-cheese-preview.jpg" },
+    { name: "Vegánska omeleta z cícer. múky", kcal: 310, img: "https://img.ccnull.de/1100000/preview/1101474_4153248d9c023b9d5618b8005142c689.jpg" },
+    { name: "Pečené tofu s cuketou",     kcal: 370, img: "https://howtomakedinner.com/wp-content/uploads/2019/11/grilled_zucchini_salad-1024x683.jpg" },
+    { name: "Kokosové curry s karfiolom", kcal: 410, img: "https://i0.wp.com/jamdownfoodie.com/wp-content/uploads/2021/05/IMG_5219.jpg?resize=585%2C585&ssl=1" },
+    { name: "Smoothie s rastlinným proteínom", kcal: 250, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvqGhT_OfqL5j8QUe8NetfX-QE_0OQy_qn5A&s" }
+  ],
+
+  vegetarian: [
+    { name: "Ovsená kaša s ovocím",      kcal: 380, img: "https://i1.pickpik.com/photos/154/326/346/food-drink-breakfast-food-fruit-preview.jpg" },
+    { name: "Šošovicové kari",          kcal: 420, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyGY9FgXjWuMNyBggUJyz2DDiwa0ksm0JENQ&s" },
+    { name: "Pečená zelenina s tofu",   kcal: 400, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFGFJsHHfWldfahUAOAh7OPnZ71UGfwZQ_5w&s" },
+    { name: "Vajcia so špenátom",        kcal: 320, img: "https://i1.pickpik.com/photos/370/841/76/spinach-egg-potato-eat-preview.jpg" },
+    { name: "Zeleninové lasagne",       kcal: 460, img: "https://live.staticflickr.com/23/32878005_de22f9b9cc_b.jpg" },
+    { name: "Tvaroh s ovocím",          kcal: 310, img: "https://freerangestock.com/sample/173205/yogurt-bowl-with-fruits-and-granola.jpg" },
+    { name: "Grécky šalát",             kcal: 340, img: "https://www.cookipedia.co.uk/wiki/images/8/87/Greek_salad_recipe.jpg" },
+    { name: "Zeleninové rizoto",        kcal: 390, img: "https://i1.pickpik.com/photos/397/437/136/flowers-yellow-table-lovely-preview.jpg" },
+    { name: "Cestoviny s pestom",       kcal: 450, img: "https://freerangestock.com/sample/163143/fresh-pesto-pasta-with-cherry-tomatoes.jpg" }
+  ],
+
+  lowcarb: [
+    { name: "Grécky jogurt s orechmi",   kcal: 290, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg-Kpot8CH8AmRoUFYYfRzGQKIkW8lfZaFyQ&s" },
+    { name: "Kuracie prsia so zeleninou", kcal: 410, img: "https://i1.pickpik.com/photos/1007/557/253/broccoli-chicken-healthy-home-preview.jpg" },
+    { name: "Losos so šalátom",          kcal: 480, img: "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL2ZsMjkxNDIyNTY3MjEtaW1hZ2UuanBn.jpg" },
+    { name: "Tuniakový šalát",           kcal: 360, img: "https://cdn.shopify.com/s/files/1/0764/9111/files/AHI_480x480.jpg?v=1573113458" },
+    { name: "Vajcia s avokádom",         kcal: 330, img: "https://i1.pickpik.com/photos/711/982/403/food-drink-food-healthy-preview.jpg" },
+    { name: "Morčacie kúsky s cuketou",  kcal: 420, img: "https://cdn.outrank.so/bc0e5a34-34df-4dd4-ac14-a782d6c2078a/f214aec6-e979-42fe-ae53-a1c501be45ce.jpg" },
+    { name: "Tvaroh s mandľami",         kcal: 280, img: "https://images.rawpixel.com/image_social_landscape/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHg2MDkzMjUtaW1hZ2Uta3d2eGxtMWUuanBn.jpg" },
+    { name: "Šalát s vajcom a syrom",    kcal: 350, img: "https://i1.pickpik.com/photos/29/361/180/food-salad-olives-olive-oil-preview.jpg" },
+    { name: "Pečený losos s brokolicou", kcal: 450, img: "https://wholesome360.com/wp-content/uploads/2024/01/Salmon-and-petite-potatoes-02_1673639050.webp" }
+  ],
+
+  standard: [
+    { name: "Vajcia s pečivom",           kcal: 350, img: "https://i1.pickpik.com/photos/213/179/720/fried-eggs-breakfast-toast-food-preview.jpg" },
+    { name: "Morčacie mäso s ryžou",      kcal: 460, img: "https://live.staticflickr.com/4061/4666209452_dd16b0c84f_b.jpg" },
+    { name: "Tvaroh s ovocím",           kcal: 310, img: "https://freerangestock.com/sample/173205/yogurt-bowl-with-fruits-and-granola.jpg" },
+    { name: "Ovsená kaša s medom",        kcal: 370, img: "https://cdn.stocksnap.io/img-thumbs/960w/oatmeal-honey_NBCKVD5IDL.jpg" },
+    { name: "Cestoviny s mäsom",         kcal: 520, img: "https://live.staticflickr.com/4067/4335462959_1d6be040b3_b.jpg" },
+    { name: "Pečené kura so zemiakmi",   kcal: 500, img: "https://live.staticflickr.com/6079/6029836707_e840ac3488_c.jpg" },
+    { name: "Rybí filé s ryžou",         kcal: 440, img: "https://sanshreefoods.com/wp-content/uploads/2025/09/oven-baked-spiced-basa-on-harissa-risotto.jpg" },
+    { name: "Tuniakové cestoviny",       kcal: 480, img: "https://www.cookipedia.co.uk/wiki/images/5/59/Ensalada_de_macarrones_y_atun_recipe.jpg" },
+    { name: "Hovädzí guláš",             kcal: 530, img: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Goulash_hungarian.jpg" }
+  ]
+};
+
+
+
+  // 🍴 zostavenie menu podľa preferencií
+  function buildSampleMeals(p) {
+    const has = (k) => p.has(k);
+    if (has('vegan') || (has('vegetarian') && has('lowcarb'))) return mealsData.vegan_lowcarb;
+    if (has('vegetarian')) return mealsData.vegetarian;
+    if (has('lowcarb')) return mealsData.lowcarb;
+    return mealsData.standard;
+  }
+
+  // 🧾 render kariet
+  function renderMealCards(mealList) {
+    const wrap = document.getElementById('mealCards');
+    wrap.innerHTML = mealList.map(meal => `
+      <article class="card">
+        <img class="thumb" src="${meal.img}" alt="${meal.name}" loading="lazy" />
+        <h4>${meal.name}</h4>
+        <p class="meta">≈ ${meal.kcal} kcal</p>
+      </article>
+    `).join('');
+  }
+
+  // odoslanie formulára
+  document.getElementById('quizForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const age = parseFloat(document.getElementById('age').value);
+    const sex = document.getElementById('sex').value;
+    const act = document.getElementById('activity').value;
+
+    const kcal = estimateKcalBase(sex, age, act);
+    let p = 0.25, c = 0.45, f = 0.30;
+    if (goal === 'lose') { p = 0.30; c = 0.40; f = 0.30; }
+    if (goal === 'gain') { p = 0.25; c = 0.50; f = 0.25; }
+
+    document.getElementById('outKcal').textContent    = kcal + ' kcal';
+    document.getElementById('outProtein').textContent = Math.round(kcal * p / 4) + ' g';
+    document.getElementById('outCarbs').textContent   = Math.round(kcal * c / 4) + ' g';
+    document.getElementById('outFats').textContent    = Math.round(kcal * f / 9) + ' g';
+
+    const meals = buildSampleMeals(prefs);
+    renderMealCards(meals);
+    document.getElementById('result').classList.remove('hidden');
+  });
+</script>
+
+</body>
+</html>

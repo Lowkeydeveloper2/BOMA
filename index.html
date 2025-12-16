@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BOMA – Domov</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+  <header>
+    <div class="container header-wrap">
+      <div class="brand">
+          <a href="index.html"><img src="images/logo-boma.png" class="logo" width="300" alt="BOMA Logo" ></a>
+        
+      </div>
+      <nav>
+        <a class="navlink active" href="index.html">Domov</a>
+        <a class="navlink" href="bmi.html">BMI</a>
+        <a class="navlink" href="dotaznik.html">Odporúčania</a>
+        <a class="navlink" href="survey.html">Prieskum</a>
+      </nav>
+    </div>
+    <hr>
+  </header>
+
+  <main class="container">
+    <h1>Vitaj v BOMA</h1>
+    <p>Jednoduchý sprievodca k lepším návykom: zisti svoj BMI a získaj tipy na jedálniček podľa tvojich cieľov.</p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Čo nájdeš na týchto stránkach</h3>
+        <ul class="list">
+          <li><b>Domov</b>: prehľad a rýchle prekliky.</li>
+          <li><b>BMI kalkulačka</b>: orientačné vyhodnotenie podľa výšky a hmotnosti.</li>
+          <li><b>Dotazník</b>: návrhy stravy podľa cieľa, preferencií a aktivity.</li>
+        </ul>
+        <div class="row">
+          <a class="btn primary" href="dotaznik.html">Vyplniť dotazník</a>
+          <a class="btn" href="bmi.html">Prejsť na BMI</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>O projekte</h3>
+        <p>BOMA pomáha zistiť, ako si na tom so svojou výživou a ponúka odporúčania pre zdravší životný štýl.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>© <span id="year"></span> Lukáš Hochel. BOMA - Edukačný projekt.</footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+

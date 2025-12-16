@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+  <title>Výživa – odporúčania s fotkami</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+  <header>
+    <div class="container header-wrap" id="fix">
+      <div class="brand">
+          <a href="index.html"><img src="images/logo-boma.png" class="logo" width="300" alt="BOMA Logo" ></a>
+        
+      </div>
+      <nav>
+        <a class="navlink" href="index.html">Domov</a>
+        <a class="navlink" href="bmi.html">BMI</a>
+        <a class="navlink active" href="dotaznik.html">Odporúčania</a>
+        <a class="navlink" href="survey.html">Prieskum</a>
+      </nav>
+    </div>
+    <hr>
+  </header>
+<main class="container">
+  <h1>Stravovací mini-plán</h1>
+
+  <!-- Ukážkové ovládanie (ak už máš vlastné inputs, nechaj svoje id-čka, len ponechaj výsledkové id-čka nižšie) -->
+  <form id="quizForm" class="row" autocomplete="off">
+    <label>Vek: <input id="age" type="number" min="10" max="90" step="1" required></label>
+    <label>Pohlavie:
+      <select id="sex">
+        <option value="male">muž</option>
+        <option value="female">žena</option>
+      </select>
+    </label>
+    <label>Aktivita:
+      <select id="activity">
+        <option value="low">nízka</option>
+        <option value="moderate" selected>stredná</option>
+        <option value="high">vysoká</option>
+      </select>
+    </label>
+
+    <div id="goalRow" class="row">
+      <strong>Cieľ:</strong>
+      <span class="pill active" data-goal="lose">chudnúť</span>
+      <span class="pill" data-goal="maintain">udržať</span>
+      <span class="pill" data-goal="gain">pribrať</span>
+    </div>
+
+    <div id="prefs" class="row">
+      <strong>Preferencie:</strong>
+      <span class="pill" data-pref="vegetarian">vegetarián</span>
+      <span class="pill" data-pref="vegan">vegan</span>
+      <span class="pill" data-pref="lowcarb">low-carb</span>
+    </div>
+
+    <button type="submit">Vypočítať</button>
+  </form>
+
+  <section id="result" class="hidden">
+    <h2>Tvoj denný plán</h2>
+    <div class="nums">
+      <div><div><strong id="outKcal">–</strong></div><div class="muted">kcal</div></div>
+      <div><div><strong id="outProtein">–</strong></div><div class="muted">bielkoviny</div></div>
+      <div><div><strong id="outCarbs">–</strong></div><div class="muted">sacharidy</div></div>
+      <div><div><strong id="outFats">–</strong></div><div class="muted">tuky</div></div>
+    </div>
+
+    <h3>Navrhované jedlá</h3>
+    <!--<ul id="meals" class="hidden"></ul> -->
+
+    <div id="mealCards" class="grid"></div>
+
+    <p id="tips" class="muted"></p>
+
+    <p class="muted">
+    </p>
+  </section>
+</main>
+
+<footer>© <span id="yearFooter"></span> Lukáš Hochel. BOMA - Edukačný projekt. </footer>
+
+<script src="dotaznik.js"></script>
+
+</body>
+</html>
+

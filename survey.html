@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BOMA – Domov</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body id="survey">
+  <header>
+    <div class="container header-wrap">
+      <div class="brand">
+          <a href="index.html"><img src="images/logo-boma.png" class="logo" width="300" alt="BOMA Logo" ></a>
+        
+      </div>
+      <nav>
+        <a class="navlink" href="index.html">Domov</a>
+        <a class="navlink" href="bmi.html">BMI</a>
+        <a class="navlink" href="dotaznik.html">Odporúčania</a>
+        <a class="navlink active" href="survey.html">Prieskum</a>
+      </nav>
+    </div>
+    <hr>
+  </header>
+
+  <main class="container">
+    <h1>Prieskum</h1>
+    <form id="survey-form">
+        <fieldset>
+          <label for="name" id="name-label">Meno a priezvisko<input type="text" id="name" name="name" placeholder="Vaše meno a priezvisko" required></label>
+          <label for="email" id="email-label">Email<input type="email" id="email" name="email" required placeholder="Váš email"></label>
+  <label for="number" id="number-label">Vek <small>(voliteľné)</small><input type="number" id="number" name="number" min="0" max="120" placeholder="Váš vek"></label>
+  <label for="current-condition">Ktorá možnosť popisuje váš aktuálny stav?<select id="current-condition"><option value="1">Svalnatý</option><option value="2">Fit</option>
+  <option value="3" selected>Normálny</option><option value="4">Nadváha</option><option value="5">Podváha</option></select></label>
+  </fieldset>
+  <fieldset>
+    <legend>Odporučili by ste BOMA Vašim priateľom?</legend>
+    <label for="yes" class="recommendation"><input type="radio" id="yes" value="yes" name="recommend" class="radio" checked>Áno</label>
+    <label for="maybe" class="recommendation"><input type="radio" value="maybe" name="recommend" id="maybe" class="radio">Možno</label>
+    <label for="no" class="recommendation"><input type="radio" name="recommend" id="no" value="no" class="radio">Nie</label>
+    </fieldset>
+     <fieldset>
+    <legend>Kde ste o nás počuli prvý krát?</legend>
+    <label for="internet" class="hear"><input type="radio" id="internet" value="internet" name="hear" class="radio" checked>Internet</label>
+    <label for="social-media" class="hear"><input type="radio" name="hear" id="social-media" value="social-media" class="radio">Sociálne média</label>
+    <label for="friends" class="hear"><input type="radio" name="hear" id="friends" value="friends" class="radio">Kamaráti</label>
+    </fieldset>
+    <fieldset>
+  <label for="favorite-feature">Aká je Vaša obľúbená funkcia BOMA?<select id="dropdown"><option value="BMI-calculator" selected>BMI kalkulačka</option>
+  <option value="diet-recommendations">Dotazník</option>
+  </select></label>
+  
+    <p>Čo by ste radi zmenili? <small>(viac odpovedí je možných)</small></p>
+  <label for="BMI-calculation">
+    <input type="checkbox" id="BMI-calculation" value="BMI-calculation" name="improved">BMI Kalkulačka</label>
+    <label for="diet-recommendations"><input type="checkbox" id="diet-recommendations" value="diet-recommendations" name="improved">Dotazník</label>
+    <label for="homepage"><input type="checkbox" id="homepage" value="homepage" name="improved">Domovská stránka</label>
+    </fieldset>
+    <fieldset>
+      <p>Máte nejaké návrhy?</p>
+      <label for="comments"><textarea rows="5" cols="40"></textarea>
+        </fieldset>
+        <input type="submit" id="submit" value="Odoslať">
+        </form>
+
+  </main>
+
+  <footer>© <span id="year"></span> Lukáš Hochel. BOMA - Edukačný projekt.</footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
